@@ -1,0 +1,48 @@
+[07-Nov-2025 11:10:16 Europe/Berlin] API Request - Method: POST, Action: update
+[07-Nov-2025 11:10:16 Europe/Berlin] POST data: Array
+(
+    [id] => 7
+    [type] => lost
+    [title] => cat
+    [category] => Other
+    [description] => black cat 2
+    [location] => 123
+    [date_occurred] => 2025-11-07
+)
+
+[07-Nov-2025 11:10:16 Europe/Berlin] FILES data: Array
+(
+    [image] => Array
+        (
+            [name] => Garfield.webp
+            [full_path] => Garfield.webp
+            [type] => image/webp
+            [tmp_name] => C:\xampp\tmp\phpA9A6.tmp
+            [error] => 0
+            [size] => 126974
+        )
+
+)
+
+[07-Nov-2025 11:10:16 Europe/Berlin] Update item - ID: 7, Title: cat
+[07-Nov-2025 11:10:16 Europe/Berlin] Item found, current image: none
+[07-Nov-2025 11:10:16 Europe/Berlin] New image uploaded, processing...
+[07-Nov-2025 11:10:16 Europe/Berlin] File details: Array
+(
+    [name] => Garfield.webp
+    [full_path] => Garfield.webp
+    [type] => image/webp
+    [tmp_name] => C:\xampp\tmp\phpA9A6.tmp
+    [error] => 0
+    [size] => 126974
+)
+
+[07-Nov-2025 11:10:16 Europe/Berlin] Upload result: Array
+(
+    [success] => 1
+    [path] => uploads/items/item_690dc588c8b39_1762510216.webp
+    [message] => Image uploaded successfully
+)
+
+[07-Nov-2025 11:10:16 Europe/Berlin] New image path: uploads/items/item_690dc588c8b39_1762510216.webp
+[07-Nov-2025 11:10:16 Europe/Berlin] Database update result: success
