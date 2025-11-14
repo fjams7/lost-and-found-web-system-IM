@@ -6,6 +6,7 @@
 
 require_once '../config/database.php';
 require_once 'upload-handler.php';
+require_once 'email-sender.php';
 
 header('Content-Type: application/json');
 
@@ -397,7 +398,7 @@ function deleteItem() {
 }
 
 /**
- * Contact poster
+ * Contact poster - Now with email notification
  */
 function contactPoster() {
     if (!isLoggedIn()) {
@@ -422,10 +423,65 @@ function contactPoster() {
     }
 
     try {
+        // Get item details and poster information
+        $stmt = $conn->prepare("
+            SELECT i.*, u.email as poster_email, u.full_name as poster_name 
+            FROM items i 
+            JOIN users u ON i.user_id = u.id 
+            WHERE i.id = ?
+        ");
+        $stmt->execute([$itemId]);
+        $item = $stmt->fetch();
+
+        if (!$item) {
+            echo json_encode(['success' => false, 'message' => 'Item not found']);
+            return;
+        }
+
+        // Get requester information
+        $stmt = $conn->prepare("SELECT username, email, full_name FROM users WHERE id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+        $requester = $stmt->fetch();
+
+        // Save contact request to database
         $stmt = $conn->prepare("INSERT INTO contacts (item_id, requester_id, message, contact_info) VALUES (?, ?, ?, ?)");
         $stmt->execute([$itemId, $_SESSION['user_id'], $message, $contactInfo]);
 
-        echo json_encode(['success' => true, 'message' => 'Contact request sent successfully']);
+        // Send email notification to poster
+        $emailSender = new EmailSender();
+        
+        $posterData = [
+            'email' => $item['poster_email'],
+            'name' => $item['poster_name']
+        ];
+        
+        $requesterData = [
+            'name' => $requester['full_name'],
+            'email' => $requester['email']
+        ];
+        
+        $itemData = [
+            'title' => $item['title'],
+            'type' => $item['type']
+        ];
+        
+        $emailResult = $emailSender->sendContactNotification(
+            $posterData,
+            $requesterData,
+            $itemData,
+            $message,
+            $contactInfo
+        );
+
+        // Log email result but don't fail the request if email fails
+        if (!$emailResult['success']) {
+            error_log("Email notification failed: " . $emailResult['message']);
+        }
+
+        echo json_encode([
+            'success' => true, 
+            'message' => 'Contact request sent successfully. The poster will be notified via email.'
+        ]);
 
     } catch(PDOException $e) {
         error_log("Error sending contact: " . $e->getMessage());

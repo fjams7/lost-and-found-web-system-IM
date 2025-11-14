@@ -46,3 +46,52 @@
 
 [07-Nov-2025 11:10:16 Europe/Berlin] New image path: uploads/items/item_690dc588c8b39_1762510216.webp
 [07-Nov-2025 11:10:16 Europe/Berlin] Database update result: success
+[07-Nov-2025 11:27:00 Europe/Berlin] API Request - Method: POST, Action: update
+[07-Nov-2025 11:27:00 Europe/Berlin] POST data: Array
+(
+    [id] => 7
+    [type] => lost
+    [title] => cat
+    [category] => Other
+    [description] => black cat 2
+    [location] => 123
+    [date_occurred] => 2025-11-07
+)
+
+[07-Nov-2025 11:27:00 Europe/Berlin] FILES data: Array
+(
+    [image] => Array
+        (
+            [name] => pngimg.com - scissors_PNG10.png
+            [full_path] => pngimg.com - scissors_PNG10.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\phpFAAB.tmp
+            [error] => 0
+            [size] => 707118
+        )
+
+)
+
+[07-Nov-2025 11:27:00 Europe/Berlin] Update item - ID: 7, Title: cat
+[07-Nov-2025 11:27:00 Europe/Berlin] Item found, current image: uploads/items/item_690dc588c8b39_1762510216.webp
+[07-Nov-2025 11:27:00 Europe/Berlin] New image uploaded, processing...
+[07-Nov-2025 11:27:00 Europe/Berlin] File details: Array
+(
+    [name] => pngimg.com - scissors_PNG10.png
+    [full_path] => pngimg.com - scissors_PNG10.png
+    [type] => image/png
+    [tmp_name] => C:\xampp\tmp\phpFAAB.tmp
+    [error] => 0
+    [size] => 707118
+)
+
+[07-Nov-2025 11:27:00 Europe/Berlin] Upload result: Array
+(
+    [success] => 1
+    [path] => uploads/items/item_690dc9748a2ac_1762511220.png
+    [message] => Image uploaded successfully
+)
+
+[07-Nov-2025 11:27:00 Europe/Berlin] Deleting old image: uploads/items/item_690dc588c8b39_1762510216.webp
+[07-Nov-2025 11:27:00 Europe/Berlin] New image path: uploads/items/item_690dc9748a2ac_1762511220.png
+[07-Nov-2025 11:27:00 Europe/Berlin] Database update result: success

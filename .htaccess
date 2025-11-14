@@ -59,3 +59,5 @@ Options -Indexes
     ExpiresByType text/css "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
+
+SetEnv RESEND_API_KEY "re_GrzeZ9wM_LvLDqFWDw4fZ4r29U8dbuS5z"

@@ -150,12 +150,28 @@ function createItemCard(item) {
     const isOwner = currentUser && currentUser.id == item.user_id;
     const isResolved = item.status === 'resolved';
     
+    // Determine icon based on category
+    const categoryIcons = {
+        'Electronics': 'fa-laptop',
+        'Bags': 'fa-bag-shopping',
+        'Jewelry': 'fa-gem',
+        'Clothing': 'fa-shirt',
+        'Books': 'fa-book',
+        'Personal Items': 'fa-wallet',
+        'Other': 'fa-box'
+    };
+    const icon = categoryIcons[item.category] || 'fa-box';
+    
     return `
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm hover-shadow" onclick="showItemDetails(${item.id})">
+            <div class="card item-card shadow-sm hover-shadow" onclick="showItemDetails(${item.id})">
                 ${item.image_path ? `
-                    <img src="${escapeHtml(item.image_path)}" class="card-img-top" alt="${escapeHtml(item.title)}" style="height: 200px; object-fit: cover;">
-                ` : ''}
+                    <img src="${escapeHtml(item.image_path)}" class="card-img-top" alt="${escapeHtml(item.title)}">
+                ` : `
+                    <div class="placeholder-img">
+                        <i class="fas ${icon}"></i>
+                    </div>
+                `}
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-2">
                         <span class="badge bg-${typeClass}">${typeBadge}</span>
@@ -205,12 +221,28 @@ async function showItemDetails(itemId) {
     const typeClass = item.type === 'lost' ? 'danger' : 'success';
     const canContact = currentUser && currentUser.id != item.user_id;
     const isResolved = item.status === 'resolved';
+    
+    // Determine icon based on category
+    const categoryIcons = {
+        'Electronics': 'fa-laptop',
+        'Bags': 'fa-bag-shopping',
+        'Jewelry': 'fa-gem',
+        'Clothing': 'fa-shirt',
+        'Books': 'fa-book',
+        'Personal Items': 'fa-wallet',
+        'Other': 'fa-box'
+    };
+    const icon = categoryIcons[item.category] || 'fa-box';
 
     modalBody.innerHTML = `
         <div class="modal-item-details">
             ${item.image_path ? `
                 <img src="${escapeHtml(item.image_path)}" class="img-fluid rounded mb-3" alt="${escapeHtml(item.title)}">
-            ` : ''}
+            ` : `
+                <div class="placeholder-img rounded mb-3">
+                    <i class="fas ${icon}"></i>
+                </div>
+            `}
             
             <div class="d-flex gap-2 mb-3">
                 <span class="badge bg-${typeClass}">${item.type}</span>
